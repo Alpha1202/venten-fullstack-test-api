@@ -28,5 +28,6 @@ module.exports = {
     logging: false,
   },
   isTest: process.env.NODE_ENV === 'test',
+  isDev: process.env.NODE_ENV === 'development',
   port: process.env.PORT
 };
