@@ -1,0 +1,64 @@
+{
+  "name": "venten-fullsatck-test-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "npm run undo:migrate && npm run migrate && npm run seed",
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
+    "migrate": "sequelize db:migrate",
+    "undo:migrate": "sequelize db:migrate:undo:all",
+    "seed": "sequelize db:seed:all"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/polyfill": "^7.4.3",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/register": "^7.4.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "debug": "^4.1.1",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.3",
+    "file-type": "^12.0.1",
+    "multer": "^1.4.1",
+    "multer-storage-cloudinary": "^2.2.1",
+    "pg": "^7.11.0",
+    "pg-connection-string": "^2.1.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.8.12",
+    "sequelize-cli": "^5.5.0",
+    "@babel/preset-stage-0": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "cross-env": "^6.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "faker": "^4.1.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alpha1202/venten-fullsatck-test-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alpha1202/venten-fullsatck-test-api/issues"
+  },
+  "homepage": "https://github.com/Alpha1202/venten-fullsatck-test-api#readme"
+}
