@@ -22,15 +22,9 @@ class ProductsHelper {
 				offset,
 				limit: defaultLimit,
 				attributes: {
-					exclude: [ 'createdAt', 'updatedAt' ]
+					exclude: [ 'createdAt', 'updatedAt', 'description', 'color', 'catId' ]
 				},
-				order: [ [ 'id', 'ASC' ] ],
-				include: [
-					{
-						model: Category,
-						attributes: [ 'id', 'name' ]
-					}
-				]
+				order: [ [ 'id', 'ASC' ] ]
 			});
 			const pages = Math.ceil(count / defaultLimit) || 1;
 			productsData = {
