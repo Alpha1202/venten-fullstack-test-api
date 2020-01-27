@@ -1,20 +1,20 @@
 import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
+
+
+import middlewareConfig from './db/config/middleware';
 import config from './db/config/config';
+import router from './routes'
 
 const { port } = config
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+middlewareConfig(app)
 
 
 app.get('/', (req, res) => {
     res.send('welcome')
 })
-
+app.use(router);
 
 app.listen(port, err => {
     if(err) {
