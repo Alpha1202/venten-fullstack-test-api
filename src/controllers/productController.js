@@ -1,6 +1,7 @@
+import { Product } from '../db/models';
 import ProductsHelper from '../helpers/productsHelper';
 
-const { getAllProducts } = ProductsHelper;
+const { getAllProducts, getProduct } = ProductsHelper;
 /**
  * @description Product controller
  * @class ProductController
@@ -29,6 +30,34 @@ class ProductController {
 				status: 200,
 				message: 'All products fetched successfully',
 				data: [ { ...productsData } ]
+			});
+		}
+
+		return res.status(500).json({
+			status: 500,
+			message: error.message
+		});
+	}
+
+	/**
+   * @description - Get a single product
+   * @static
+   * @async
+   * @param {object} req - request
+   * @param {object} res - response
+   * @returns {object} product
+   *
+   */
+	static async getProduct(req, res) {
+		const { id } = req.params;
+
+		const product = await getProduct(id);
+
+		if (product) {
+			return res.status(200).json({
+				status: 200,
+				message: `Product fetched successfully`,
+				data: [ product ]
 			});
 		}
 

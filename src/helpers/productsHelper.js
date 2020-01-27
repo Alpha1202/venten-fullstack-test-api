@@ -40,5 +40,35 @@ class ProductsHelper {
 			throw error;
 		}
 	}
+	/**
+   *@description This method fetches a single article
+   * @param {object} req
+   * @param {object} res
+   * @param {function} next
+   * @returns {function} next
+   * @memberof ProductsHelper
+   */
+	static async getProduct(id) {
+		try {
+			const product = await Product.findOne({
+				where: {
+					id
+				},
+				attributes: {
+					exclude: [ 'createdAt', 'updatedAt' ]
+				},
+				include: [
+					{
+						model: Category,
+						attributes: [ 'id', 'name' ]
+					}
+				]
+			});
+
+			return product;
+		} catch (error) {
+			throw error;
+		}
+	}
 }
 export default ProductsHelper;
