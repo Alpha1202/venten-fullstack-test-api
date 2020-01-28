@@ -7,8 +7,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "npm run pretest && babel src -d lib && node lib/index.js",
-    "start": "npm run pretest && npm run build && node lib/index.js",
+    "build": "npm run pretest && babel src -d lib && npm run start",
+    "start": "node lib/index.js",
     "pretest": "npm run undo:migrate && npm run migrate && npm run seed",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
     "migrate": "sequelize db:migrate",
