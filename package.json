@@ -5,10 +5,10 @@
   "engines": {
     "node": "12.x"
   },
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "build": "npm run pretest && babel src -d lib",
-    "start": "node lib/index.js",
+    "build": "babel src -d lib",
+    "start": "npm run pretest && npm run build && node lib/index.js",
     "pretest": "npm run undo:migrate && npm run migrate && npm run seed",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
     "migrate": "sequelize db:migrate",
@@ -48,6 +48,7 @@
     "regenerator-runtime": "^0.13.3",
     "sequelize": "^5.8.12",
     "sequelize-cli": "^5.5.0",
+    "morgan": "^1.9.1",
     "yup": "^0.28.0"
   },
   "devDependencies": {
@@ -57,7 +58,6 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-prettier": "^3.1.0",
     "faker": "^4.1.0",
-    "morgan": "^1.9.1",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2"
   },
