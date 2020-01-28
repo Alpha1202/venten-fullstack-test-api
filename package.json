@@ -1,9 +1,14 @@
 {
-  "name": "venten-fullsatck-test-api",
+  "name": "venten-fullstack-test-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "API for the venten fullstack test",
+  "engines": {
+    "node": "12.x"
+  },
   "main": "index.js",
   "scripts": {
+    "build": "npm run pretest && babel src -d lib",
+    "start": "node lib/index.js",
     "pretest": "npm run undo:migrate && npm run migrate && npm run seed",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
     "migrate": "sequelize db:migrate",
@@ -40,6 +45,7 @@
     "pg": "^7.11.0",
     "pg-connection-string": "^2.1.0",
     "pg-hstore": "^2.3.3",
+    "regenerator-runtime": "^0.13.3",
     "sequelize": "^5.8.12",
     "sequelize-cli": "^5.5.0",
     "yup": "^0.28.0"
