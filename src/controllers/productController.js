@@ -1,5 +1,9 @@
+import * as Yup from 'yup';
 import { Product } from '../db/models';
 import ProductsHelper from '../helpers/productsHelper';
+import { uploader } from '../helpers/cloudinaryConfig';
+import { multerUploads, dataUri } from '../helpers/multerConfig';
+
 
 const { getAllProducts, getProduct } = ProductsHelper;
 /**
@@ -65,6 +69,72 @@ class ProductController {
 			status: 500,
 			message: error.message
 		});
+	}
+
+	/**
+   * @description - adds a new product to the database
+   * @static
+   * @async
+   * @param {object} req - add product request object
+   * @param {object} res - create product response object
+   * @returns {object} newly added product
+   *
+   */
+	static async addNewProduct(req, res) {
+		const { name, description, price, catId, color } = req.body;
+		
+		const bodySchema = Yup.object().shape({
+			name: Yup.string().required(),
+			description: Yup.string().required(),
+			price: Yup.number().required().positive(),
+			catId: Yup.number().required().integer(),
+			color: Yup.string().required()
+		});
+		try {
+			await bodySchema.validate({
+				name,
+				description,
+				price,
+				catId,
+				color
+			});
+
+			let imageUrl;
+			if (req.file) {
+				const file = dataUri(req).content;
+				await uploader
+					.upload(file)
+					.then((result) => {
+						return (imageUrl = result.url);
+					})
+					.catch((err) =>
+						res.status(400).json({
+							error: err.message,
+							messge: 'someting went wrong while processing your request'
+						})
+					);
+				const newProductData = {
+					name,
+					description,
+					price,
+					catId,
+					imageUrl,
+					color
+				};
+				const newProduct = await Product.create(newProductData);
+				
+				return res.status(201).json({
+					status: 201,
+					message: 'Product added successfully',
+					data: [ newProduct ]
+				});
+			}
+		} catch (error) {
+			return res.status(500).json({
+				status: 500,
+				message: error.message
+			});
+		}
 	}
 }
 export default ProductController;
